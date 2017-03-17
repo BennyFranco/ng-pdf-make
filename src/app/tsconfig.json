@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "outDir": "../../dist",
+    "baseUrl": "./app",
+    "target": "es5",
+    "module": "es6",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "noEmitHelpers": false,
+    "noImplicitAny": false,
+    "declaration": true,
+    "skipLibCheck": false,
+    "stripInternal": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "types": [
+      "jasmine",
+      "../node_modules/@types/node"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "../temp/factories",
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "entryModule": "app/library/libary.module#LibraryModule"
+  }
+}

@@ -32,6 +32,6 @@
     "genDir": "../temp/factories",
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "entryModule": "app/library/libary.module#LibraryModule"
+    "entryModule": "app/pdfmake/pdfmake.module#PdfmakeModule"
   }
 }

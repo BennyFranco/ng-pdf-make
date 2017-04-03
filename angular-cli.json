@@ -20,7 +20,10 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/pdfmake/build/pdfmake.js",
+        "../node_modules/pdfmake/build/vfs_fonts.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "source": "environments/environment.ts",
@@ -55,11 +58,13 @@
       "service": true
     }
   },
-  "module":[{
-    "name": "ng-pdf-make",
-    "root": "src",
-    "outDir": "dist",
-    "main":"index.ts",
-    "tsconfig": "tsconfig.json"
-  }]
+  "module": [
+    {
+      "name": "ng-pdf-make",
+      "root": "src",
+      "outDir": "dist",
+      "main": "index.ts",
+      "tsconfig": "tsconfig.json"
+    }
+  ]
 }

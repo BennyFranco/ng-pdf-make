@@ -1,10 +1,12 @@
 export class Table {
     headers: Row;
     rows: Row[];
+    widths: any[];
 
-    constructor(headers: Row, rows: Row[]) {
+    constructor(headers: Row, rows: Row[], widths?: any[]) {
         this.headers = headers;
         this.rows = rows;
+        this.widths = widths;
     }
 }
 

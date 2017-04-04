@@ -34,7 +34,8 @@ export class ExampleComponent implements OnInit {
 
     const row1 = new Row([new Cell('One value goes here '), new Cell('Another one here'), new Cell('OK?')]);
 
-    const table = new Table(headerRows, [row1]);
+    const widths = [100, '*', 200, '*'];
+    const table = new Table(headerRows, [row1], widths);
 
     this.pdfmake.addTable(table);
   }

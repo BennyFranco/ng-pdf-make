@@ -48,7 +48,10 @@ export class PdfmakeService {
   addTable(table: Table) {
     const body = [];
     let row = [];
+
     if (table) {
+
+
       for (const header of table.headers.cells) {
         row.push(header.content);
       }
@@ -63,7 +66,19 @@ export class PdfmakeService {
         body.push(row);
       }
 
-      const tableDictionary = { table: { body: body } };
+      let tableDictionary;
+
+      if (table.widths) {
+        tableDictionary = {
+          table:
+          {
+            widths: table.widths,
+            body: body
+          }
+        };
+      } else {
+        tableDictionary = { table: { body: body } };
+      }
 
       this.docDefinition.content.push(tableDictionary);
     }

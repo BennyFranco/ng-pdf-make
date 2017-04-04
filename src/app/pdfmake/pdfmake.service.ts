@@ -20,8 +20,8 @@ export class PdfmakeService {
     pdfMake.createPdf(this.docDefinition).print();
   }
 
-  download() {
-    pdfMake.createPdf(this.docDefinition).download();
+  download(name?: string) {
+    pdfMake.createPdf(this.docDefinition).download(name);
   }
 
   configureStyles(styles) {

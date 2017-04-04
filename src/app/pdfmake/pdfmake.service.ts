@@ -5,7 +5,15 @@ declare const pdfMake;
 
 @Injectable()
 export class PdfmakeService {
+
+  pageSize = 'LETTER';
+  pageOrientation = 'portrait';
+
+  private base64textString = '';
+
   docDefinition: any = {
+    pageSize: this.pageSize,
+    pageOrientation: this.pageOrientation,
     content: [],
     styles: {}
   };
@@ -82,5 +90,35 @@ export class PdfmakeService {
 
       this.docDefinition.content.push(tableDictionary);
     }
+  }
+
+  addImage(url: string, width?: number, height?: number) {
+    let data;
+    const image = new Image();
+
+    image.setAttribute('crossOrigin', 'anonymous');
+    image.src = url;
+
+    image.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+
+      canvas.getContext('2d').drawImage(image, 0, 0);
+
+      data = canvas.toDataURL('image/png');
+      let dict;
+      if (width) {
+        if (height) {
+          dict = { image: data, width: width, height: height };
+        } else {
+          dict = { image: data, width: width };
+        }
+      } else {
+        dict = { image: data };
+      }
+
+      this.docDefinition.content.push(dict);
+    };
   }
 }

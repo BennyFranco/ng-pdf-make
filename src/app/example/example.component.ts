@@ -38,5 +38,10 @@ export class ExampleComponent implements OnInit {
     const table = new Table(headerRows, [row1], widths);
 
     this.pdfmake.addTable(table);
+
+    this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png');
+    this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png', 200);
+    this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png', 300, 150);
+
   }
 }

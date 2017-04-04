@@ -121,4 +121,20 @@ export class PdfmakeService {
       this.docDefinition.content.push(dict);
     };
   }
+
+  addUnorderedlist(items: any[]) {
+    this.docDefinition.content.push({ ul: items });
+  }
+
+  addOrderedList(items: any[], reversed?: boolean, start?: number) {
+    if (reversed) {
+      this.docDefinition.content.push({ reversed: reversed, ol: items });
+    } else if (reversed && start) {
+      this.docDefinition.content.push({ reversed: reversed, start: start, ol: items });
+    } else if (start) {
+      this.docDefinition.content.push({ start: start, ol: items });
+    } else {
+      this.docDefinition.content.push({ ol: items });
+    }
+  }
 }

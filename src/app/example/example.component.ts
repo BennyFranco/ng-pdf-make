@@ -39,9 +39,18 @@ export class ExampleComponent implements OnInit {
 
     this.pdfmake.addTable(table);
 
-    this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png');
-    this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png', 200);
-    this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png', 300, 150);
+    const list1 = ['item 1', 'item 2', 'item 3'];
+    const list2 = ['item 1', 'item 2', 'item 3'];
+    const list3 = ['item 1', 'item 2', 'item 3'];
+    const list4 = ['item 1', 'item 2', 'item 3'];
 
+    this.pdfmake.addUnorderedlist(list1);
+    this.pdfmake.addOrderedList(list2);
+    this.pdfmake.addOrderedList(list3, true);
+    this.pdfmake.addOrderedList(list4, false, 50);
+
+    this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png');
+    this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png', 300, 150);
+    this.pdfmake.addImage('http://localhost:4200/assets/daniel.jpg', 200);
   }
 }

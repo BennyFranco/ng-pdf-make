@@ -1,13 +1,14 @@
-# ng-pdf-make
+# ng-pdfmake
 
 This is library creates a bridge to use [pdfmake](http://pdfmake.org) library with your
 angular 2 implementation.
+It's a fork of BennyFranco repository: [ng-pdf-make](https://github.com/BennyFranco/ng-pdf-make), the fork you can see [here](https://github.com/jtpdev/ng-pdf-make).
 
 ## Install
 
 You can get it on npm:
 
-`npm install ng-pdf-make --save`
+`npm install jtpdev-pdfmaker --save`
 
 ## Ready
 

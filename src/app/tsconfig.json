@@ -12,21 +12,20 @@
     "noEmitHelpers": false,
     "noImplicitAny": false,
     "declaration": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "stripInternal": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "lib": [
       "dom",
       "es6"
-    ],
-    "types": [
-      "jasmine",
-      "../node_modules/@types/node"
     ]
   },
   "exclude": [
     "node_modules"
+  ],
+  "files": [
+    "index.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "../temp/factories",

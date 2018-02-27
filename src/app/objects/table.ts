@@ -11,9 +11,9 @@ export class Table {
 }
 
 export class Cell {
-    content: string;
+    content: any;
 
-    constructor(content: string) {
+    constructor(content: any) {
         this.content = content;
     }
 }

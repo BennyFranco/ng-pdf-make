@@ -26,7 +26,10 @@ export class ExampleComponent implements OnInit {
 
     this.pdfmake.addColumns(columns);
 
-    const header1 = new Cell('Header1');
+    const header1 = new Cell({
+      text: 'Header1',
+      fillColor: '#cecece'
+    });
     const header2 = new Cell('Header2');
     const header3 = new Cell('Header3');
 

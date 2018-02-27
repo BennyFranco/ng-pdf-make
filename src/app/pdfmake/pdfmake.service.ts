@@ -69,6 +69,9 @@ export class PdfmakeService {
       for (const rowObj of table.rows) {
         row = [];
         for (const cell of rowObj.cells) {
+          // if(typeof cell.content == 'string'){
+
+          // }
           row.push(cell.content);
         }
         body.push(row);

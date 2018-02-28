@@ -10,6 +10,10 @@ You can get it on npm:
 
 `npm install jtpdev-pdfmaker --save`
 
+## New
+
+- Now have openPDF method.
+
 ## Ready
 
 pdfmake is fully customizable, so for now the options ready to use are:
@@ -75,6 +79,9 @@ export class ExampleComponent implements OnInit {
 
   ngOnInit() {
 
+    // Open document
+    this.pdfmake.openPDF();
+
     // Configure text styles  
     this.pdfmake.configureStyles({ header: { fontSize: 18, bold: true } });
 
@@ -122,6 +129,9 @@ export class ExampleComponent implements OnInit {
 
     // Add image from localhost and using width
     this.pdfmake.addImage('http://localhost:4200/assets/daniel.jpg', 200);
+
+    // Close the document
+    this.pdfmake.close();
   }
 }
 

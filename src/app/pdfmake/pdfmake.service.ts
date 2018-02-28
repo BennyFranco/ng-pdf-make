@@ -8,15 +8,11 @@ export class PdfmakeService {
 
   pageSize = 'LETTER';
   pageOrientation = 'portrait';
+  isOpen = false;
 
   private base64textString = '';
 
-  docDefinition: any = {
-    pageSize: this.pageSize,
-    pageOrientation: this.pageOrientation,
-    content: [],
-    styles: {}
-  };
+  docDefinition: any;
 
   constructor() { }
 
@@ -34,6 +30,24 @@ export class PdfmakeService {
 
   configureStyles(styles) {
     this.docDefinition.styles = styles;
+  }
+
+  clear(){
+    this.docDefinition.content = [];
+  }
+
+  close(){
+    this.isOpen = false;
+  }
+  
+  openPDF(){
+    this.docDefinition = {
+      pageSize: this.pageSize,
+      pageOrientation: this.pageOrientation,
+      content: [],
+      styles: {}
+    };
+    this.isOpen = true;
   }
 
   addText(text: string, style?: string) {

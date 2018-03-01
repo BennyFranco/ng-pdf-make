@@ -12,6 +12,7 @@ export class ExampleComponent implements OnInit {
   constructor(private pdfmake: PdfmakeService) { }
 
   ngOnInit() {
+    this.pdfmake.openPDF();
     this.pdfmake.configureStyles({ header: { fontSize: 18, bold: true } });
     this.pdfmake.addText('This is a header, using header style', 'header');
     this.pdfmake.addText('This is an sample PDF printed with pdfMake');
@@ -54,6 +55,16 @@ export class ExampleComponent implements OnInit {
 
     this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png');
     this.pdfmake.addImage('http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png', 300, 150);
-    this.pdfmake.addImage('http://localhost:4200/assets/daniel.jpg', 200);
+
+    /*
+
+    // Those are the methods to clear and close
+
+    this.pdfmake.clear();
+    setTimeout(() => {
+      this.pdfmake.close();
+      this.pdfmake.openPDF();
+    }, 1000);
+    */
   }
 }

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Table } from '../objects/table';
+import * as pdfMakeCore from 'pdfmake/build/pdfmake';
+import * as pdfMakeFonts from 'pdfmake/build/vfs_fonts';
 
-declare const pdfMake;
+//declare const pdfMake;
 
 @Injectable()
 export class PdfmakeService {
@@ -18,18 +20,24 @@ export class PdfmakeService {
     styles: {}
   };
 
-  constructor() { }
+ pdfMake = pdfMakeCore;
+
+  constructor() {
+    this.pdfMake.vfs = pdfMakeFonts.pdfMake.vfs
+  }
 
   open() {
-    pdfMake.createPdf(this.docDefinition).open();
+    //pdfMake.createPdf(this.docDefinition).open();
   }
 
   print() {
-    pdfMake.createPdf(this.docDefinition).print();
+    //pdfMake.createPdf(this.docDefinition).print();
   }
 
   download(name?: string) {
-    pdfMake.createPdf(this.docDefinition).download(name);
+    // pdfMake.createPdf(this.docDefinition).download(name);
+    this.pdfMake.createPdf(this.docDefinition).download(name);
+    //console.log(this.pdfMake);
   }
 
   configureStyles(styles) {

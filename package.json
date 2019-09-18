@@ -10,7 +10,8 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
-    "build": "copy package.json \"src\\app\" && ngm build -p src/app"
+    "build": "rimraf dist && ngc -p src/app/tsconfig.json & copy package.json \"dist\"",
+    "copy": "copy \"src/app/pdfmake/index.d.ts\" \"dist/pdfmake\""
   },
   "private": false,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@angular/platform-browser": "^2.3.1",
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
+    "@types/pdfmake": "0.1.1",
     "core-js": "^2.4.1",
     "pdfmake": "^0.1.27",
     "rxjs": "^5.0.1",
@@ -37,6 +39,7 @@
     "codelyzer": "~2.0.0-beta.1",
     "coffee-script": "^1.12.4",
     "copy": "^0.3.0",
+    "gulp": "^3.9.1",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.5.0",
     "karma": "^1.2.0",

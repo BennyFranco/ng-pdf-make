@@ -1,55 +1,45 @@
 import { Injectable } from '@angular/core';
 import { Table } from '../objects/table';
+import { PdfDefinition } from '../objects/pdf';
 import * as pdfMakeCore from 'pdfmake/build/pdfmake';
 import * as pdfMakeFonts from 'pdfmake/build/vfs_fonts';
-
-//declare const pdfMake;
 
 @Injectable()
 export class PdfmakeService {
 
-  pageSize = 'LETTER';
-  pageOrientation = 'portrait';
+  pageSize: pdfMakeCore.pageSizeType = 'LETTER';
+  pageOrientation: pdfMakeCore.pageOrientationType = 'portrait';
+  documentDefinition: PdfDefinition;
 
-  private base64textString = '';
-
-  docDefinition: any = {
-    pageSize: this.pageSize,
-    pageOrientation: this.pageOrientation,
-    content: [],
-    styles: {}
-  };
-
- pdfMake = pdfMakeCore;
+  private pdfMake: any;
 
   constructor() {
+    this.pdfMake = pdfMakeCore;
     this.pdfMake.vfs = pdfMakeFonts.pdfMake.vfs
   }
 
   open() {
-    //pdfMake.createPdf(this.docDefinition).open();
+    this.pdfMake.createPdf(this.documentDefinition).open();
   }
 
   print() {
-    //pdfMake.createPdf(this.docDefinition).print();
+    this.pdfMake.createPdf(this.documentDefinition).print();
   }
 
   download(name?: string) {
-    // pdfMake.createPdf(this.docDefinition).download(name);
-    this.pdfMake.createPdf(this.docDefinition).download(name);
-    //console.log(this.pdfMake);
+    this.pdfMake.createPdf(this.documentDefinition).download(name);
   }
 
-  configureStyles(styles) {
-    this.docDefinition.styles = styles;
+  configureStyles(styles: any) {
+    this.documentDefinition.styles = styles;
   }
 
   addText(text: string, style?: string) {
     if (style) {
-      this.docDefinition.content.push({ text: text, style: style });
+      this.documentDefinition.content.push({ text: text, style: style });
       return;
     }
-    this.docDefinition.content.push(text);
+    this.documentDefinition.content.push(text);
   }
 
   addColumns(columnsText: string[]) {
@@ -58,7 +48,7 @@ export class PdfmakeService {
       columns.push({ text: column });
     }
 
-    this.docDefinition.content.push({ columns: columns });
+    this.documentDefinition.content.push({ columns: columns });
   }
 
   addTable(table: Table) {
@@ -96,7 +86,7 @@ export class PdfmakeService {
         tableDictionary = { table: { body: body } };
       }
 
-      this.docDefinition.content.push(tableDictionary);
+      this.documentDefinition.content.push(tableDictionary);
     }
   }
 
@@ -126,23 +116,23 @@ export class PdfmakeService {
         dict = { image: data };
       }
 
-      this.docDefinition.content.push(dict);
+      this.documentDefinition.content.push(dict);
     };
   }
 
   addUnorderedlist(items: any[]) {
-    this.docDefinition.content.push({ ul: items });
+    this.documentDefinition.content.push({ ul: items });
   }
 
   addOrderedList(items: any[], reversed?: boolean, start?: number) {
     if (reversed) {
-      this.docDefinition.content.push({ reversed: reversed, ol: items });
+      this.documentDefinition.content.push({ reversed: reversed, ol: items });
     } else if (reversed && start) {
-      this.docDefinition.content.push({ reversed: reversed, start: start, ol: items });
+      this.documentDefinition.content.push({ reversed: reversed, start: start, ol: items });
     } else if (start) {
-      this.docDefinition.content.push({ start: start, ol: items });
+      this.documentDefinition.content.push({ start: start, ol: items });
     } else {
-      this.docDefinition.content.push({ ol: items });
+      this.documentDefinition.content.push({ ol: items });
     }
   }
 }

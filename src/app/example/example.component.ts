@@ -34,7 +34,7 @@ export class ExampleComponent implements OnInit {
 
     const headerRows = new Row([header1, header2, header3]);
 
-    const row1 = new Row([new Cell('One value goes here '), new Cell('Another one here'), new Cell('OK?', { fillColor: '#010101' })]);
+    const row1 = new Row([new Cell('One value goes here '), new Cell('Another one here'), new Cell('OK?', { fillColor: '#cecece' })]);
 
     const widths = [100, '*', 200, '*'];
     const table = new Table(headerRows, [row1], widths);

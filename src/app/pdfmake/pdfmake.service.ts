@@ -47,8 +47,8 @@ export class PdfmakeService {
     this.getPdfDefinition().styles = styles;
   }
 
-  addText(text: string, style?: any | string) {
-    this.getPdfDefinition().content.push({ text: text, style: style });
+  addText(text: string, style?: any | string, pageBreak?:string) {
+    this.getPdfDefinition().content.push({ text: text, style: style, pageBreak: pageBreak });
   }
 
   addColumns(columnsText: string[]) {
@@ -74,7 +74,7 @@ export class PdfmakeService {
         }
       }
 
-      this.getPdfDefinition().content.push({ widths: table.widths, body: body });
+      this.getPdfDefinition().content.push({ table: { widths: table.widths, body: body }});
     }
   }
 
@@ -85,7 +85,7 @@ export class PdfmakeService {
     image.src = url;
 
     image.onload = () => {
-      const canvas = document.createElement('canvas');
+      let canvas = document.createElement('canvas');
       canvas.width = image.naturalWidth;
       canvas.height = image.naturalHeight;
 
@@ -102,6 +102,8 @@ export class PdfmakeService {
       };
 
       this.getPdfDefinition().content.push(finalImage);
+
+      canvas = null;
     };
   }
 

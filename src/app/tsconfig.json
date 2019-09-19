@@ -16,6 +16,7 @@
     "stripInternal": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "configFile": "../tslint.json",
     "lib": [
       "dom",
       "es6"

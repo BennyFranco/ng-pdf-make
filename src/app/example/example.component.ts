@@ -9,11 +9,13 @@ import { Cell, Row, Table } from '../objects/table';
 })
 export class ExampleComponent implements OnInit {
 
-  constructor(private pdfmake: PdfmakeService) { }
+  constructor(public pdfmake: PdfmakeService) { }
 
   ngOnInit() {
+    this.pdfmake.create();
     this.pdfmake.configureStyles({ header: { fontSize: 18, bold: true } });
     this.pdfmake.addText('This is a header, using header style', 'header');
+    this.pdfmake.addText('This is a header, using a custom style', { fontSize: 16, bold: true });
     this.pdfmake.addText('This is an sample PDF printed with pdfMake');
     // tslint:disable-next-line:max-line-length
     this.pdfmake.addText('Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines');
@@ -32,7 +34,7 @@ export class ExampleComponent implements OnInit {
 
     const headerRows = new Row([header1, header2, header3]);
 
-    const row1 = new Row([new Cell('One value goes here '), new Cell('Another one here'), new Cell('OK?')]);
+    const row1 = new Row([new Cell('One value goes here '), new Cell('Another one here'), new Cell('OK?', { fillColor: '#010101' })]);
 
     const widths = [100, '*', 200, '*'];
     const table = new Table(headerRows, [row1], widths);

@@ -13,37 +13,42 @@ export class PdfmakeService {
 
   private pdfMake: any;
 
+  private base64;
+
   constructor() {
     this.pdfMake = pdfMakeCore;
-    this.pdfMake.vfs = pdfMakeFonts.pdfMake.vfs
+    this.pdfMake.vfs = pdfMakeFonts.pdfMake.vfs;
+  }
 
-    if (!this.documentDefinition) {
-      this.documentDefinition = new PdfDefinition();
+  create() {
+    if (this.documentDefinition) {
+      this.destroy();
     }
+    this.documentDefinition = new PdfDefinition();
+  }
+
+  destroy() {
+    this.documentDefinition = null;
   }
 
   open() {
-    this.pdfMake.createPdf(this.documentDefinition).open();
+    this.pdfMake.createPdf(this.getPdfDefinition()).open();
   }
 
   print() {
-    this.pdfMake.createPdf(this.documentDefinition).print();
+    this.pdfMake.createPdf(this.getPdfDefinition()).print();
   }
 
   download(name?: string) {
-    this.pdfMake.createPdf(this.documentDefinition).download(name);
+    this.pdfMake.createPdf(this.getPdfDefinition()).download(name);
   }
 
   configureStyles(styles: any) {
-    this.documentDefinition.styles = styles;
+    this.getPdfDefinition().styles = styles;
   }
 
-  addText(text: string, style?: string) {
-    if (style) {
-      this.documentDefinition.content.push({ text: text, style: style });
-      return;
-    }
-    this.documentDefinition.content.push(text);
+  addText(text: string, style?: any | string) {
+    this.getPdfDefinition().content.push({ text: text, style: style });
   }
 
   addColumns(columnsText: string[]) {
@@ -52,43 +57,24 @@ export class PdfmakeService {
       columns.push({ text: column });
     }
 
-    this.documentDefinition.content.push({ columns: columns });
+    this.getPdfDefinition().content.push({ columns: columns });
   }
 
   addTable(table: Table) {
     const body = [];
-    let row = [];
 
     if (table) {
-      for (const header of table.headers.cells) {
-        row.push(header.content);
+      if (table.headers) {
+        body.push(table.headers.get());
       }
 
-      body.push(row);
-
-      for (const rowObj of table.rows) {
-        row = [];
-        for (const cell of rowObj.cells) {
-          row.push(cell.content);
+      if (table.rows) {
+        for (const row of table.rows) {
+          body.push(row.get());
         }
-        body.push(row);
       }
 
-      let tableDictionary;
-
-      if (table.widths) {
-        tableDictionary = {
-          table:
-          {
-            widths: table.widths,
-            body: body
-          }
-        };
-      } else {
-        tableDictionary = { table: { body: body } };
-      }
-
-      this.documentDefinition.content.push(tableDictionary);
+      this.getPdfDefinition().content.push({ widths: table.widths, body: body });
     }
   }
 
@@ -109,13 +95,13 @@ export class PdfmakeService {
         height = width;
       }
 
-      let finalImage = {
+      const finalImage = {
         image: canvas.toDataURL('image/png'),
         width: width ? width : image.naturalWidth,
         height: height ? height : image.naturalHeight
       };
 
-      this.documentDefinition.content.push(finalImage);
+      this.getPdfDefinition().content.push(finalImage);
     };
   }
 
@@ -123,15 +109,15 @@ export class PdfmakeService {
     this.documentDefinition.content.push({ ul: items });
   }
 
-  addOrderedList(items: any[], reversed?: boolean, start?: number) {
-    if (reversed) {
-      this.documentDefinition.content.push({ reversed: reversed, ol: items });
-    } else if (reversed && start) {
-      this.documentDefinition.content.push({ reversed: reversed, start: start, ol: items });
-    } else if (start) {
-      this.documentDefinition.content.push({ start: start, ol: items });
+  addOrderedList(items: any[], reversed = false, start?: number) {
+    this.getPdfDefinition().content.push({ reversed: reversed, start: start, ol: items });
+  }
+
+  private getPdfDefinition() {
+    if (this.documentDefinition) {
+      return this.documentDefinition;
     } else {
-      this.documentDefinition.content.push({ ol: items });
+      throw new Error('The document isn\'t open! Please use the create()" method to open it before use it.');
     }
   }
 }

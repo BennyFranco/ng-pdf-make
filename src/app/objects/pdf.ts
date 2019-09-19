@@ -1,4 +1,4 @@
-import { TDocumentDefinitions, TDocumentInformation, pageSizeType, pageOrientationType } from "pdfmake/build/pdfmake";
+import { TDocumentDefinitions, TDocumentInformation, pageSizeType, pageOrientationType } from 'pdfmake/build/pdfmake';
 
 export class PdfDefinition implements TDocumentDefinitions {
   info?: TDocumentInformation;

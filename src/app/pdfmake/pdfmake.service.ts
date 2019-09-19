@@ -16,6 +16,10 @@ export class PdfmakeService {
   constructor() {
     this.pdfMake = pdfMakeCore;
     this.pdfMake.vfs = pdfMakeFonts.pdfMake.vfs
+
+    if (!this.documentDefinition) {
+      this.documentDefinition = new PdfDefinition();
+    }
   }
 
   open() {
@@ -56,8 +60,6 @@ export class PdfmakeService {
     let row = [];
 
     if (table) {
-
-
       for (const header of table.headers.cells) {
         row.push(header.content);
       }
@@ -91,7 +93,6 @@ export class PdfmakeService {
   }
 
   addImage(url: string, width?: number, height?: number) {
-    let data;
     const image = new Image();
 
     image.setAttribute('crossOrigin', 'anonymous');
@@ -104,19 +105,17 @@ export class PdfmakeService {
 
       canvas.getContext('2d').drawImage(image, 0, 0);
 
-      data = canvas.toDataURL('image/png');
-      let dict;
-      if (width) {
-        if (height) {
-          dict = { image: data, width: width, height: height };
-        } else {
-          dict = { image: data, width: width };
-        }
-      } else {
-        dict = { image: data };
+      if (width && !height) {
+        height = width;
       }
 
-      this.documentDefinition.content.push(dict);
+      let finalImage = {
+        image: canvas.toDataURL('image/png'),
+        width: width ? width : image.naturalWidth,
+        height: height ? height : image.naturalHeight
+      };
+
+      this.documentDefinition.content.push(finalImage);
     };
   }
 

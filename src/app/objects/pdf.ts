@@ -12,4 +12,8 @@ export class PdfDefinition implements TDocumentDefinitions {
   defaultStyle?: {
     font?: string;
   };
+
+  constructor() {
+    this.content = [];
+  }
 }

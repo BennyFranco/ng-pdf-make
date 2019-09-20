@@ -1,8 +1,12 @@
 {
   "name": "ng-pdf-make",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "license": "MIT",
   "angular-cli": {},
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/BennyFranco/ng-pdf-make.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

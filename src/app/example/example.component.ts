@@ -30,11 +30,11 @@ export class ExampleComponent implements OnInit {
 
     const header1 = new Cell('Header1');
     const header2 = new Cell('Header2');
-    const header3 = new Cell('Header3');
+    const header3 = new Cell('Header3', { fillColor: '#cecece' });
 
     const headerRows = new Row([header1, header2, header3]);
 
-    const row1 = new Row([new Cell('One value goes here '), new Cell('Another one here'), new Cell('OK?', { fillColor: '#cecece' })]);
+    const row1 = new Row([new Cell('One value goes here '), new Cell('Another one here'), new Cell('OK?')]);
 
     const widths = [100, '*', 200, '*'];
     const table = new Table(headerRows, [row1], widths);

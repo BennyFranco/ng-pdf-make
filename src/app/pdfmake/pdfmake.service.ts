@@ -119,7 +119,7 @@ export class PdfmakeService {
     if (this.documentDefinition) {
       return this.documentDefinition;
     } else {
-      throw new Error('The document isn\'t open! Please use the create()" method to open it before use it.');
+      throw new Error('The document isn\'t created! Please use the create()" method to create it before use it.');
     }
   }
 }

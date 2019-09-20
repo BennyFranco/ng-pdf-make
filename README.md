@@ -3,6 +3,13 @@
 This is library creates a bridge to use [pdfmake](http://pdfmake.org) library with your
 angular 2 implementation.
 
+# Notice:
+
+```
+The update 0.1.0 is released to fix some of the issues reported and was updated to continue working with angular 2.x.
+The angular 4/6 support will be relased in the future, be pacient. 
+```
+
 ## Install
 
 You can get it on npm:
@@ -23,10 +30,10 @@ pdfmake is fully customizable, so for now the options ready to use are:
 - Open function.
 - Print function.
 - Page properties (Size and orientation).
+- Inline text styles using css format.
+- Columns widths and styles using css style format.
 
 ## To do
-- Inline text styles.
-- Columns widths and styles.
 - Nested tables.
 - More customizable tables.
 - Nested Lists.
@@ -70,15 +77,23 @@ import { PdfmakeService } from 'ng-pdf-make/pdfmake/pdfmake.service';
 export class ExampleComponent implements OnInit {
 
   // Inject pdfmake service
-  constructor(private pdfmake: PdfmakeService) { }
+  constructor(public pdfmake: PdfmakeService) { }
 
   ngOnInit() {
+
+    // Create a pdf document
+    // IMPORTANT: if a document was created before, this method will destroy it and
+    // create a new instance.
+    this.pdfmake.create();
 
     // Configure text styles  
     this.pdfmake.configureStyles({ header: { fontSize: 18, bold: true } });
 
     // Add a text with style
     this.pdfmake.addText('This is a header, using header style', 'header');
+
+    // Add a text with custom style
+    this.pdfmake.addText('This is a header, using a custom style', { fontSize: 16, bold: true });
 
     // Add simple text
     this.pdfmake.addText('This is an sample PDF printed with pdfMake');
@@ -121,6 +136,10 @@ export class ExampleComponent implements OnInit {
 
     // Add image from localhost and using width
     this.pdfmake.addImage('http://localhost:4200/assets/daniel.jpg', 200);
+
+    // Destroy pdf instance
+    // You can destroy intencionally the pdf instance
+    // this.pdfmake.destroy();
   }
 }
 
@@ -148,7 +167,7 @@ export class ExampleComponent implements OnInit {
     // Create Headers cells
     const header1 = new Cell('Header1');
     const header2 = new Cell('Header2');
-    const header3 = new Cell('Header3');
+    const header3 = new Cell('Header3', { fillColor: '#cecece' });
 
     // Create headers row
     const headerRows = new Row([header1, header2, header3]);
@@ -203,8 +222,13 @@ in your controller
 
 ## Advance
 
-If you need to use some unimplemented function, you can send the tradicional dictionary document structure to the `docDefinition` attribute in the service.
+If you need to use some unimplemented function, you can send the tradicional dictionary document structure to the `documentDefinition` attribute in the service.
 
 ```typescript
-    pdfmake.docDefinition = { ... }
+    pdfmake.documentDefinition = { ... }
 ```
+
+## Credits
+
+* [pdfmake](http://pdfmake.org) by  [@bpampuch](https://github.com/bpampuch) and [@liborm85](https://github.com/liborm85)
+* [@jtpdev](https://github.com/jtpdev) - Suggestions, features and an alternative library here [https://github.com/jtpdev/ng-pdf-make](https://github.com/jtpdev/ng-pdf-make)

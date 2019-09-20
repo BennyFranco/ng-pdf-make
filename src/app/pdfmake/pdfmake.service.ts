@@ -47,7 +47,7 @@ export class PdfmakeService {
     this.getPdfDefinition().styles = styles;
   }
 
-  addText(text: string, style?: any | string, pageBreak?:string) {
+  addText(text: string, style?: any | string, pageBreak?: string) {
     this.getPdfDefinition().content.push({ text: text, style: style, pageBreak: pageBreak });
   }
 
@@ -74,7 +74,7 @@ export class PdfmakeService {
         }
       }
 
-      this.getPdfDefinition().content.push({ table: { widths: table.widths, body: body }});
+      this.getPdfDefinition().content.push({ table: { widths: table.widths, body: body } });
     }
   }
 

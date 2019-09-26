@@ -1,4 +1,4 @@
-import { TDocumentDefinitions, TDocumentInformation, pageSizeType, pageOrientationType } from 'pdfmake/build/pdfmake';
+import { TDocumentDefinitions, TDocumentInformation, PageSize, PageOrientation } from 'pdfmake/build/pdfmake';
 
 export class PdfDefinition implements TDocumentDefinitions {
   info?: TDocumentInformation;
@@ -6,8 +6,8 @@ export class PdfDefinition implements TDocumentDefinitions {
   footer?: any;
   content: any;
   styles?: any;
-  pageSize?: pageSizeType;
-  pageOrientation?: pageOrientationType;
+  pageSize?: PageSize;
+  pageOrientation?: PageOrientation;
   pageMargins?: [number, number, number, number];
   defaultStyle?: {
     font?: string;

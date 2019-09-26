@@ -7,13 +7,11 @@ import * as pdfMakeFonts from 'pdfmake/build/vfs_fonts';
 @Injectable()
 export class PdfmakeService {
 
-  pageSize: pdfMakeCore.pageSizeType = 'LETTER';
-  pageOrientation: pdfMakeCore.pageOrientationType = 'portrait';
+  pageSize: pdfMakeCore.PageSize = pdfMakeCore.PageSize.LETTER;
+  pageOrientation: pdfMakeCore.PageOrientation = pdfMakeCore.PageOrientation.PORTRAIT;
   documentDefinition: PdfDefinition;
 
   private pdfMake: any;
-
-  private base64;
 
   constructor() {
     this.pdfMake = pdfMakeCore;

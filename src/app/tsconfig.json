@@ -1,9 +1,10 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
     "outDir": "../../dist",
     "baseUrl": "./app",
-    "target": "es5",
-    "module": "es6",
+    "target": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -17,20 +18,19 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "lib": [
-      "dom",
-      "es6"
+      "es2018",
+      "dom"
     ],
-    "types": [
-      "jasmine",
-      "../../node_modules/@types/node",
+    "typeRoots": [
+      "../../node_modules/@types",
       "../../node_modules/@types/pdfmake"
     ]
   },
   "exclude": [
-    "node_modules"
+    "**/node_modules/*"
   ],
   "angularCompilerOptions": {
-    "genDir": "../temp/factories",
+    "genDir": "../../temp/factories",
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
     "entryModule": "app/pdfmake/pdfmake.module#PdfmakeModule"

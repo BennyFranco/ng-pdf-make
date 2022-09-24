@@ -6,8 +6,7 @@ angular 2 implementation.
 # Notice:
 
 ```
-The update 0.1.0 is released to fix some of the issues reported and was updated to continue working with angular 2.x.
-The angular 4/6 support will be relased in the future, be pacient. 
+This library is deprecated and will not receive more updates.
 ```
 
 ## Install
